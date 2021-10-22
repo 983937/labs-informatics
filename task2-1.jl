@@ -44,11 +44,11 @@ programType = getType()
 
 if programType == Int(Arithmetic)
  
-  result = (a + b)/2
+  result = (a*a*a + b*b*b)/2
   println("Среднее арифметическое этих чисел $result")
 end
 
 if programType == Int(Geometric)
-  result = sqrt(a*b)
+  result = sqrt(abs(a)*abs(b))
   println("Среднее геометрическое этих чисел $result")
 end
