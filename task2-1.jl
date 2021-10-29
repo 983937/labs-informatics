@@ -1,25 +1,12 @@
 @enum FunctionType Arithmetic = 1 Geometric
 
-function calcA()
+function getInt(num)
   while true
-    print("Введите значение первой стороны: ")
+    print("Введите значение $num стороны: ")
     a = readline()
     if tryparse(Float32, a) !== nothing 
       println("Вы ввели $(a)")
       return parse(Float32,a)
-    else
-      @warn "Введите число!"
-    end
-  end
-end
-
-function calcB()
-  while true
-    print("Введите значение первой стороны: ")
-    b = readline()
-    if tryparse(Float32, b) !== nothing 
-      println("Вы ввели $(b)")
-      return parse(Float32,b)
     else
       @warn "Введите число!"
     end
@@ -38,8 +25,9 @@ while true
     end
   end
 end
-a = calcA()
-b = calcB()
+
+a = getInt(1)
+b = getInt(2)
 programType = getType()
 
 if programType == Int(Arithmetic)
