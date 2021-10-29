@@ -4,29 +4,21 @@ println("Для корректной работы данной программ�
 println("1. вводится должны только целые числа")
 println("2. конечный интервал должен быть больше начального")
 
-function calcBeginValue()
+function getValue(message, isEndValue = false)
 while true
-    println("Введите начало интервала:")
-    beginValue = readline()
-    if tryparse(Float32, beginValue) !== nothing 
-      println("Вы ввели $(beginValue)")
-      return parse(Float32,beginValue)
-    else
-      @warn "Введите число!"
-    end
-  end
-end
-
-function calcEndValue()
-while true
-    println("Введите конец интервала:")
-    endValue = readline()
-    if tryparse(Float32, endValue) !== nothing 
-      if  parse(Float32,endValue) > beginValue
-        println("Вы ввели $(endValue)")
-        return parse(Float32,endValue)
+    println(message)
+    value = readline()
+    if tryparse(Float32, value) !== nothing 
+      if  isEndValue == true 
+        if parse(Float32,value) > beginValue
+          println("Вы ввели $(value)")
+          return parse(Float32,value)
+        else
+          @warn "Конечный интервал должен быть больше начального"
+        end
       else
-        @warn "Конечный интервал должен быть больше начального"
+        println("Вы ввели $(value)")
+        return parse(Float32,value)
       end
     else
       @warn "Введите число!"
@@ -34,23 +26,9 @@ while true
   end
 end
 
-function calcStepValue()
-while true
-    println("Введите шаг интервала:")
-    stepValue = readline()
-    if tryparse(Float32, stepValue) !== nothing 
-      println("Вы ввели $(stepValue)")
-      return parse(Float32,stepValue)
-    else
-      @warn "Введите число!"
-    end
-  end
-end
-
-
-beginValue = calcBeginValue()
-endValue = calcEndValue()
-stepValue = calcStepValue()
+beginValue = getValue("Введите начало интервала")
+endValue = getValue("Введите конец интервала", true)
+stepValue = getValue("Введите шаг интервала")
 
 println("Начало интервала $beginValue, конец интервала $endValue, шаг интервала $stepValue")
 
