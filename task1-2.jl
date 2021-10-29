@@ -1,52 +1,46 @@
 function calculate()
-  a = calcA()
-  b = calcB()
-  c = calcC()
+  a = getSide(1)
+  b = getSide(2)
+  c = getSide(3)
 
-  println(a * b)
+  rectangleResult = a*b
+  println("Площадь прямоугольника: $rectangleResult")
 
-  p = a + b + c
-  triangleResult = sqrt(p * (p-a) * (p-b) * (p-c))
-  println(triangleResult)
+  isTriangle = checkTriangle(a,b,c)
+  if (isTriangle == true)
+    p = (a + b + c)/2
+    triangleResult = sqrt(p * (p-a) * (p-b) * (p-c))
+    println("Площадь треугольника: $triangleResult")
+  else
+    println("Данные стороны не могут образовывать треугольник. Перезапустите программу")
+  end
 end 
 
-function calcA()
+function getSide(sideCount)
   while true
-    print("Введите значение первой стороны: ")
+    print("Введите значение $sideCount стороны: ")
     a = readline()
-    if tryparse(Float32, a) !== nothing 
+    if tryparse(UInt8, a) !== nothing 
       println("Вы ввели $(a)")
-      return parse(Float32,a)
+      return parse(UInt8,a)
     else
-      @warn "Введите число!"
+      @warn "Введите положительное число!"
     end
   end
 end
 
-function calcB()
-  while true
-    print("Введите значение второй стороны: ")
-    b = readline()
-    if tryparse(Float32, b) !== nothing 
-      println("Вы ввели $(b)")
-      return  parse(Float32,b)
-    else
-      @warn "Введите число!"
-    end
+function checkTriangle(a,b,c)
+  Result=true;
+  if(a+b<c&&Result)
+      Result=false;
   end
+  if(b+c<a&&Result) 
+    Result=false;
+  end
+  if(a+c<b&&Result) 
+    Result=false;
+  end
+   return Result;
 end
 
-function calcC()
-  while true
-    print("Введите значение третьей стороны: ")
-    c = readline()
-    if tryparse(Float32, c) !== nothing 
-        println("Вы ввели $(c)")
-        return  parse(Float32,c)
-    else
-        @warn "Введите число!"
-    end
-  end
-end
-
-calculate()
+calculate() 
